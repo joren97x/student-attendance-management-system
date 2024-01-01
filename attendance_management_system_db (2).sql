@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 30, 2023 at 02:40 PM
+-- Generation Time: Jan 01, 2024 at 02:06 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,7 +42,10 @@ CREATE TABLE `attendance` (
 
 INSERT INTO `attendance` (`id`, `schedule_id`, `student_id`, `time_in`, `time_out`, `date`) VALUES
 (5, 1, 3, '2023-12-30 13:25:06', '2023-12-30 13:34:19', '2023-12-30'),
-(6, 1, 1, '2023-12-30 13:26:58', '2023-12-30 13:31:34', '2023-12-30');
+(6, 1, 1, '2023-12-30 13:26:58', '2023-12-30 13:31:34', '2023-12-30'),
+(7, 4, 6, '2024-01-01 00:50:15', NULL, '2024-01-01'),
+(8, 5, 3, '2024-01-01 01:02:11', NULL, '2024-01-01'),
+(9, 5, 1, '2024-01-01 01:02:59', NULL, '2024-01-01');
 
 -- --------------------------------------------------------
 
@@ -62,7 +65,8 @@ CREATE TABLE `schedules` (
 --
 
 INSERT INTO `schedules` (`id`, `time_in`, `time_out`, `date`) VALUES
-(3, '2023-12-30 08:03:00', '2023-12-30 10:03:00', '2023-12-30');
+(3, '2023-12-30 08:03:00', '2023-12-30 10:03:00', '2023-12-30'),
+(5, '2024-01-01 07:31:00', '2024-01-01 19:31:00', '2024-01-01');
 
 -- --------------------------------------------------------
 
@@ -84,8 +88,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `email`, `role`, `password`) VALUES
-(1, 'Sixto', 'Tumulak', 'sixto@email.com', 'student', 'asdasd'),
-(3, 'Ryan', 'Gosling', 'ryan@gosling.com', 'student', 'asdasd');
+(1, 'Sixto', 'Tumulak', 'sixto@email.com', 'admin', 'asdasd'),
+(3, 'Ryan', 'Gosling', 'ryan@gosling.com', 'student', 'asdasd'),
+(5, 'Hev', 'Abi', 'hev@abi.com', 'student', 'asdasd'),
+(6, 'Kirk John Tan', 'Masipag', 'hahaha@email.com', 'student', 'asdasd');
 
 --
 -- Indexes for dumped tables
@@ -117,19 +123,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `schedules`
 --
 ALTER TABLE `schedules`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
