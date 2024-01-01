@@ -12,6 +12,7 @@
     const schedules = ref(null)
     const isTimedIn = ref(null)
     const showPassword = ref(false)
+    const attendances = ref(null)
 
     async function updateProfile() {
         try{
@@ -49,6 +50,7 @@
             message.value = 'Successfully timed in'
             snackbar.value = true
             getAttendanceToday()
+            getAllAttendance()
         }
         catch(err) {
             console.log(err)
@@ -64,6 +66,8 @@
             message.value = 'Successfully timed out'
             snackbar.value = true
             getAttendanceToday()
+            getAllAttendance()
+
         }
         catch(err) {
             console.log(err)
@@ -82,6 +86,16 @@
         }
     }
 
+    async function getAllAttendance() {
+        try {
+            const result = await axios.get(`http://localhost:5000/attendance/${user.value.id}`)
+            attendances.value = result.data
+        }
+        catch(err) {
+            console.log(err)
+        }
+    }
+
     async function getSchedule() {
         const result = await axios.get("http://localhost:5000/schedule")
         schedules.value = result.data
@@ -90,6 +104,7 @@
     onMounted(() => {
         getSchedule()
         getAttendanceToday()
+        getAllAttendance()
     })
 
 </script>
@@ -107,7 +122,7 @@
                         <v-row>
                             <v-col cols="12" class="justify-center d-flex">
                                 <v-avatar size="150">
-                                    <v-img cover src="https://6.soompi.io/wp-content/uploads/image/06c12cab1784463b827d418d8d0a64dd.jpeg?s=900x600&e=t"></v-img>
+                                    <v-img cover src="https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"></v-img>
                                 </v-avatar>
                             </v-col>
                         </v-row>
@@ -170,20 +185,20 @@
             </v-col>
         </v-row>
         <v-dialog v-model="editProfileDialog">
-            <v-card title="Edit profile">
+            <v-card title="Edit profile" color="grey-lighten-3">
                 <v-card-item>
                     <v-row>
                         <v-col cols="6">
-                            <v-text-field label="First name" v-model="user.firstname"></v-text-field>
+                            <v-text-field variant="solo" label="First name" v-model="user.firstname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Last name" v-model="user.lastname"></v-text-field>
+                            <v-text-field variant="solo" label="Last name" v-model="user.lastname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Email" v-model="user.email"></v-text-field>
+                            <v-text-field variant="solo" label="Email" v-model="user.email"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Password" v-model="user.password" :type="showPassword ? '' : 'password'">
+                            <v-text-field variant="solo" label="Password" v-model="user.password" :type="showPassword ? '' : 'password'">
                                 <template v-slot:append-inner>
                                     <v-btn @click="showPassword = !showPassword" variant="text" :icon="showPassword ? 'mdi-eye-off-outline' : 'mdi-eye-outline'"></v-btn>
                                 </template>
@@ -201,6 +216,22 @@
         <v-dialog v-model="viewAttendanceRecordDialog">
             <v-card title="Attendace report">
                 <v-card-item>
+                    <v-table>
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Time in</th>
+                                <th>Time out</th>
+                            </tr>
+                        </thead>
+                        <tbody v-if="attendances">
+                            <tr v-for="att in attendances" :key="att.id">
+                                <td> {{ format(new Date(att.date), 'PPp') }} </td>
+                                <td> {{ format(new Date(att.time_in), 'PPp') }} </td>
+                                <td> {{ att.time_out ? format(new Date(att.time_out), 'PPp') : 'No time out' }} </td>
+                            </tr>
+                        </tbody>
+                    </v-table>
                 </v-card-item>
                 <v-card-actions>
                     <v-spacer/>

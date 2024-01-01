@@ -4,8 +4,8 @@
     import {format} from 'date-fns'
     import axios from 'axios'
 
-    const time_in = ref(format(new Date(), 'Y-M-d p'))
-    const time_out = ref(format(new Date(), 'Y-M-d p'))
+    const time_in = ref(format(new Date(), 'Y-MM-dd p'))
+    const time_out = ref(format(new Date(), 'Y-MM-dd p'))
     const createAttendanceDialog = ref(false)
     const deleteAttendanceDialog = ref(false)
     const snackbar = ref(false)
@@ -37,6 +37,7 @@
             createAttendanceDialog.value = false
             message.value = "Successfully added new schedule"
             snackbar.value = true
+            getSchedule()
         }
         catch(err) {
             console.log(err)
@@ -89,7 +90,6 @@
                 <v-row>
                     <v-col cols="2">
                         <p>Attendance</p>
-                        {{ is_scheduled?.length }}
                     </v-col>
                     <v-col col="2" class="justify-end d-flex">
                         <v-btn color="blue" @click="createAttendanceDialog = true" :disabled="is_scheduled?.length > 0 ? true : false">New attendance</v-btn>

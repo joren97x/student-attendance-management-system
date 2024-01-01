@@ -47,6 +47,7 @@
             message.value = 'Successfully added student'
             createStudentDialog.value = false
             snackbar.value = true
+            getStudents()
         }
         catch(err) {
             console.log(err)
@@ -141,20 +142,20 @@
         </v-card>
 
         <v-dialog v-model="createStudentDialog" width="80%">
-            <v-card title="Add new student">
+            <v-card title="Add new student" color="grey-lighten-3">
                 <v-card-text>
                     <v-row>
                         <v-col cols="6">
-                            <v-text-field label="First name" v-model="firstname"></v-text-field>
+                            <v-text-field variant="solo" label="First name" v-model="firstname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Last name" v-model="lastname"></v-text-field>
+                            <v-text-field variant="solo" label="Last name" v-model="lastname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Email" v-model="email"></v-text-field>
+                            <v-text-field variant="solo" label="Email" v-model="email"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Password" :type="showPassword ? '' : 'password'" v-model="password">
+                            <v-text-field variant="solo" label="Password" :type="showPassword ? '' : 'password'" v-model="password">
                                 <template v-slot:append-inner>
                                     <v-btn @click="showPassword = !showPassword" variant="text" :icon="showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"></v-btn>
                                 </template>
@@ -171,27 +172,27 @@
         </v-dialog>
 
         <v-dialog v-model="editStudentDialog" width="80%">
-            <v-card title="Edit student">
+            <v-card title="Edit student" color="grey-lighten-3">
                 <v-card-text>
                     <v-row>
                         <v-col cols="6">
-                            <v-text-field label="First name" v-model="selectedStudent.firstname"></v-text-field>
+                            <v-text-field variant="solo" label="First name" v-model="selectedStudent.firstname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Last name" v-model="selectedStudent.lastname"></v-text-field>
+                            <v-text-field variant="solo" label="Last name" v-model="selectedStudent.lastname"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Email" v-model="selectedStudent.email"></v-text-field>
+                            <v-text-field variant="solo" label="Email" v-model="selectedStudent.email"></v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-text-field label="Password" :type="showPassword ? '' : 'password'" v-model="selectedStudent.password" >
+                            <v-text-field variant="solo" label="Password" :type="showPassword ? '' : 'password'" v-model="selectedStudent.password" >
                                 <template v-slot:append-inner>
                                     <v-btn @click="showPassword = !showPassword" variant="text" :icon="showPassword ? 'mdi-eye-outline' : 'mdi-eye-off-outline'"></v-btn>
                                 </template>
                             </v-text-field>
                         </v-col>
                         <v-col cols="6">
-                            <v-select label="Role" :items="['student', 'admin']" v-model="selectedStudent.role"></v-select>
+                            <v-select label="Role" variant="solo" :items="['student', 'admin']" v-model="selectedStudent.role"></v-select>
                         </v-col>
                     </v-row>
                 </v-card-text>

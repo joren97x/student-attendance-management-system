@@ -14,7 +14,7 @@ const router = createRouter({
             name: 'Home',
             path: '/',
             component: Home,
-            meta: {layout: StudentLayout} 
+            meta: {layout: StudentLayout, requiresAuth: true} 
         },
         {
             name: 'Login',
@@ -26,20 +26,40 @@ const router = createRouter({
             name: 'Students',
             path: '/admin/students',
             component: Students,
-            meta: {layout: AdminLayout} 
+            meta: {layout: AdminLayout, requiresAuth: true} 
         },
         {
             name: 'Attendance',
             path: '/admin/attendance',
             component: Attendance,
-            meta: {layout: AdminLayout} 
-        },
-        {
-            name: 'Logout',
-            path: '/logout',
-            component: Login,
+            meta: {layout: AdminLayout, requiresAuth: true} 
         },
     ]
+})
+
+function isLoggedIn() {
+    const authValue = localStorage.getItem('auth');
+    console.log("Value in local storage:", authValue);
+
+    if (localStorage.getItem('auth')) {
+        return true;
+    }
+    console.log("It has a value");
+    return false;
+}
+
+router.beforeEach((to, from, next) => {
+    if(to.matched.some(record => record.meta.requiresAuth)) {
+        if(isLoggedIn()) {
+            next()
+        }
+        else {
+            next({name: 'Login'})
+        }
+    }
+    else {
+        next()
+    }
 })
 
 export default router

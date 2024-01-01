@@ -1,4 +1,12 @@
 <script setup>
+
+    import router from '../../router/index.js'
+
+    function logout() {
+        localStorage.removeItem('auth')
+        router.push('/login')
+    }
+
 </script>
 
 <template>
@@ -7,9 +15,7 @@
             <v-toolbar-title>System title</v-toolbar-title>
 
             <v-spacer></v-spacer>
-            <router-link to="/login">
-                <v-btn variant="text" color="red" prepend-icon="mdi-logout">Logout</v-btn>
-            </router-link>
+            <v-btn variant="text" color="red" @click="logout" prepend-icon="mdi-logout">Logout</v-btn>
         </v-app-bar>
 
       <v-main>
