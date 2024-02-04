@@ -1,4 +1,5 @@
-#unsaon pag run sa backend
+#it's a small project
+
 step 1: cd backend
 step 2: npm install
 step 3: node index.js
