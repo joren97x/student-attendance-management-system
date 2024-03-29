@@ -31,10 +31,6 @@ export const showAllAttendace = (req, res) => {
             .catch((err) => {
                 res.send(err)
             })
-
-            console.log(result)
-            console.log(result.length)
-            // res.json(result)
         }
     })
 }

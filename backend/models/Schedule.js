@@ -19,5 +19,5 @@ export const getScheduleToday = (res) => {
         } else {
             res(err, result)
         }
-    });
+    })
 };
