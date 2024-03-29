@@ -12,7 +12,7 @@
 <template>
     <v-layout>
         <v-app-bar color="primary" prominent>
-            <v-toolbar-title>System title</v-toolbar-title>
+            <v-toolbar-title>AMS - admin</v-toolbar-title>
 
             <v-spacer></v-spacer>
             <router-link to="/admin/students">

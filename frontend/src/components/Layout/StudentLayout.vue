@@ -12,7 +12,7 @@
 <template>
     <v-layout>
         <v-app-bar color="primary" prominent>
-            <v-toolbar-title>System title</v-toolbar-title>
+            <v-toolbar-title>AMS - student</v-toolbar-title>
 
             <v-spacer></v-spacer>
             <v-btn variant="text" color="red" @click="logout" prepend-icon="mdi-logout">Logout</v-btn>
